@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-RxWeather.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RxBlocking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RxCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RxSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>4D38338966B43C2239A8BB5D331C3D9B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>59D3232F1F2C681F2B070CB722D9A699</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BEDD6EBB9DF577613F031B23C4BD5064</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CAA71C42C04BBDFA706F62977A6688D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6EE312173C8C46524C6AFDE3B91E6BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

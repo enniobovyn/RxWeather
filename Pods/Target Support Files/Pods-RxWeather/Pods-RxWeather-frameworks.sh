@@ -84,12 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-RxWeather/Alamofire.framework"
+  install_framework "Pods-RxWeather/RxAlamofire.framework"
   install_framework "Pods-RxWeather/RxBlocking.framework"
   install_framework "Pods-RxWeather/RxCocoa.framework"
   install_framework "Pods-RxWeather/RxSwift.framework"
   install_framework "Pods-RxWeather/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-RxWeather/Alamofire.framework"
+  install_framework "Pods-RxWeather/RxAlamofire.framework"
   install_framework "Pods-RxWeather/RxBlocking.framework"
   install_framework "Pods-RxWeather/RxCocoa.framework"
   install_framework "Pods-RxWeather/RxSwift.framework"

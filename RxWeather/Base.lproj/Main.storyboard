@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Weather View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RxWeather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="WeatherViewController" customModule="RxWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -27,7 +27,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="London" borderStyle="roundedRect" placeholder="New York" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ep5-vQ-Ffr">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="London" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ep5-vQ-Ffr">
                                 <rect key="frame" x="150" y="78" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="5Kn-Tg-Ksb"/>
@@ -36,10 +36,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huY-oS-1cU">
-                                <rect key="frame" x="250" y="172" width="100" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3h-Hy-QLb">
+                                <rect key="frame" x="150" y="152" width="300" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="DNO-SU-RIO"/>
+                                    <constraint firstAttribute="height" constant="24" id="PyC-xK-t0y"/>
+                                    <constraint firstAttribute="width" constant="300" id="gYK-of-nSB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huY-oS-1cU">
+                                <rect key="frame" x="210" y="184" width="180" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="DNO-SU-RIO"/>
                                     <constraint firstAttribute="height" constant="44" id="hck-RV-STf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
@@ -49,14 +59,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="huY-oS-1cU" firstAttribute="top" secondItem="u3h-Hy-QLb" secondAttribute="bottom" constant="8" id="7Kr-KG-aBl"/>
+                            <constraint firstItem="u3h-Hy-QLb" firstAttribute="top" secondItem="ep5-vQ-Ffr" secondAttribute="bottom" constant="44" id="Ch1-Ub-CV9"/>
                             <constraint firstItem="ep5-vQ-Ffr" firstAttribute="top" secondItem="RaR-2p-Re9" secondAttribute="bottom" constant="8" id="Vud-sY-2xW"/>
                             <constraint firstItem="huY-oS-1cU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gZM-cu-zvZ"/>
                             <constraint firstItem="ep5-vQ-Ffr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lD6-rw-ibB"/>
                             <constraint firstItem="RaR-2p-Re9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="29" id="oRD-Be-uoO"/>
                             <constraint firstItem="RaR-2p-Re9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oTU-74-sPy"/>
-                            <constraint firstItem="huY-oS-1cU" firstAttribute="top" secondItem="ep5-vQ-Ffr" secondAttribute="bottom" constant="64" id="xwo-Hd-UoS"/>
+                            <constraint firstItem="u3h-Hy-QLb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yS5-Su-roi"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cityNameLabel" destination="u3h-Hy-QLb" id="CIE-ex-S48"/>
+                        <outlet property="cityNameTextField" destination="ep5-vQ-Ffr" id="RvJ-DQ-uXF"/>
+                        <outlet property="tempLabel" destination="huY-oS-1cU" id="dz8-9h-uBB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

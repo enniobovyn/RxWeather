@@ -6,8 +6,17 @@
 //  Copyright © 2016 Ennio Bovyn. All rights reserved.
 //
 
-import UIKit
+import SwiftyJSON
 
-class Weather: AnyObject {
-
+class Weather {
+    
+    var cityName:String?
+    var temp:Double?
+    
+    init(json: AnyObject) {
+        let data = JSON(json)
+        self.cityName = data["name"].stringValue
+        self.temp = data["main"]["temp"].doubleValue
+    }
+    
 }

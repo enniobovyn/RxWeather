@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-RxWeather.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RxAlamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4D38338966B43C2239A8BB5D331C3D9B</key>
+		<key>3316732D7B7C2AC6810D9A2B9718F648</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>59D3232F1F2C681F2B070CB722D9A699</key>
+		<key>432ECC54282C84882B482CCB4CF227FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BEDD6EBB9DF577613F031B23C4BD5064</key>
+		<key>5900E60417FA2A2B0159939FDF661908</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CAA71C42C04BBDFA706F62977A6688D1</key>
+		<key>7F5DEC30A6E3E253BD7D4DC3DE05D63F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F6EE312173C8C46524C6AFDE3B91E6BE</key>
+		<key>B5287B86E0577758D75FADA0B8A40914</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EDFF48EE9ECBA9CF8E04CFED767A7B17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBEC38C73296FA8E592203C6063F1821</key>
 		<dict>
 			<key>primary</key>
 			<true/>

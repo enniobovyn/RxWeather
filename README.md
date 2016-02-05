@@ -1,2 +1,2 @@
 # RxWeather
-MVVM weather app for iOS with RxSwift
+MVVM weather example app for iOS with RxSwift

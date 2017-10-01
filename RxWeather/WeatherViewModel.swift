@@ -32,8 +32,8 @@ class WeatherViewModel {
         didSet {
             if let text = searchText {
                 if (text.characters.count >= 1) {
-                    let urlString = Constants.URLPrefix + text.stringByReplacingOccurrencesOfString(" ", withString: "%20") + Constants.URLSuffix
-                    getWeatherForRequest(urlString)
+                    let urlString = Constants.URLPrefix + text.replacingOccurrences(of: " ", with: "%20") + Constants.URLSuffix
+                  getWeatherForRequest(urlString: urlString)
                 }
             }
         }
@@ -49,10 +49,10 @@ class WeatherViewModel {
         
         if let city = weather?.cityName {
         
-            self.cityName.on(.Next(city))
+            self.cityName.on(.next(city))
         
             if let temp = weather?.temp {
-                self.temp.on(.Next("\(temp)°C"))
+                self.temp.on(.next("\(temp)°C"))
             }
             
         }
@@ -60,31 +60,31 @@ class WeatherViewModel {
     }
     
     private func getWeatherForRequest(urlString: String) {
-        Alamofire.request(Method.GET, urlString).rx_responseJSON()
+        Alamofire.request(urlString).rx.responseJSON()
             .observeOn(MainScheduler.instance)
             .subscribe(
-                onNext: { json in
-                    let jsonForValidation = JSON(json.1)
-                    if let error = jsonForValidation["message"].string {
-                        print(error)
-                        self.postError("Error", message: error)
-                        return
+                onNext: { dataResponse in
+                  if let data = dataResponse.data {
+                    let json = JSON(data)
+                    if let error = json["message"].string {
+                      self.postError(title: "Error", message: error)
+                      return
                     }
-                    self.weather = Weather(json: json.1)
-                    
+                    self.weather = Weather(json: json)
+                  }
                 },
                 onError: { error in
                     print("Got error")
                     let gotError = error as NSError
                     
                     print(gotError.domain)
-                    self.postError("\(gotError.code)", message: gotError.domain)
+                  self.postError(title: "\(gotError.code)", message: gotError.domain)
             })
             .addDisposableTo(disposeBag)
     }
     
     private func postError(title: String, message: String) {
-        errorAlertController.on(.Next(UIAlertController(title: title, message: message, preferredStyle: .Alert)))
+      errorAlertController.on(.next(UIAlertController(title: title, message: message, preferredStyle: .alert)))
     }
 
 }

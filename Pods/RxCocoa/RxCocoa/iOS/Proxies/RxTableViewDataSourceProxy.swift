@@ -8,7 +8,6 @@
 
 #if os(iOS) || os(tvOS)
 
-import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
@@ -16,112 +15,71 @@ import RxSwift
 
 let tableViewDataSourceNotSet = TableViewDataSourceNotSet()
 
-class TableViewDataSourceNotSet
+final class TableViewDataSourceNotSet
     : NSObject
     , UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        rxAbstractMethodWithMessage(dataSourceNotSet)
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        rxAbstractMethodWithMessage(dataSourceNotSet)
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        rxAbstractMethodWithMessage(dataSourceNotSet)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        rxAbstractMethod(message: dataSourceNotSet)
     }
 }
 
-/**
-     For more information take a look at `DelegateProxyType`.
- */
-public class RxTableViewDataSourceProxy
-    : DelegateProxy
-    , UITableViewDataSource
-    , DelegateProxyType {
+/// For more information take a look at `DelegateProxyType`.
+open class RxTableViewDataSourceProxy
+    : DelegateProxy<UITableView, UITableViewDataSource>
+    , DelegateProxyType 
+    , UITableViewDataSource {
 
-    /**
-     Typed parent object.
-     */
+    /// Typed parent object.
     public weak private(set) var tableView: UITableView?
-    
-    private weak var _requiredMethodsDataSource: UITableViewDataSource? = tableViewDataSourceNotSet
 
-    /**
-     Initializes `RxTableViewDelegateProxy`
-
-     - parameter parentObject: Parent object for delegate proxy.
-     */
-    public required init(parentObject: AnyObject) {
-        self.tableView = (parentObject as! UITableView)
-        super.init(parentObject: parentObject)
+    /// - parameter parentObject: Parent object for delegate proxy.
+    public init(parentObject: UITableView) {
+        self.tableView = parentObject
+        super.init(parentObject: parentObject, delegateProxy: RxTableViewDataSourceProxy.self)
     }
+
+    // Register known implementations
+    public static func registerKnownImplementations() {
+        self.register { RxTableViewDataSourceProxy(parentObject: $0) }
+    }
+
+    fileprivate weak var _requiredMethodsDataSource: UITableViewDataSource? = tableViewDataSourceNotSet
 
     // MARK: delegate
 
-    /**
-    Required delegate method implementation.
-    */
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).numberOfSectionsInTableView?(tableView) ?? 1
-    }
-
-    /**
-    Required delegate method implementation.
-    */
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    /// Required delegate method implementation.
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, numberOfRowsInSection: section)
     }
 
-    /**
-    Required delegate method implementation.
-    */
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, cellForRowAtIndexPath: indexPath)
+    /// Required delegate method implementation.
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, cellForRowAt: indexPath)
     }
     
     // MARK: proxy
 
-    /**
-    For more information take a look at `DelegateProxyType`.
-    */
-    public override class func createProxyForObject(object: AnyObject) -> AnyObject {
-        let tableView = (object as! UITableView)
-
-        return castOrFatalError(tableView.rx_createDataSourceProxy())
+    /// For more information take a look at `DelegateProxyType`.
+    open class func setCurrentDelegate(_ delegate: UITableViewDataSource?, to object: ParentObject) {
+        object.dataSource = delegate
     }
 
-    /**
-     For more information take a look at `DelegateProxyType`.
-     */
-    public override class func delegateAssociatedObjectTag() -> UnsafePointer<Void> {
-        return _pointer(&dataSourceAssociatedTag)
+    /// For more information take a look at `DelegateProxyType`.
+    open class func currentDelegate(for object: ParentObject) -> UITableViewDataSource? {
+        return object.dataSource
     }
 
-    /**
-     For more information take a look at `DelegateProxyType`.
-     */
-    public class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
-        let collectionView: UITableView = castOrFatalError(object)
-        collectionView.dataSource = castOptionalOrFatalError(delegate)
-    }
-
-    /**
-     For more information take a look at `DelegateProxyType`.
-     */
-    public class func currentDelegateFor(object: AnyObject) -> AnyObject? {
-        let collectionView: UITableView = castOrFatalError(object)
-        return collectionView.dataSource
-    }
-
-    /**
-     For more information take a look at `DelegateProxyType`.
-     */
-    public override func setForwardToDelegate(forwardToDelegate: AnyObject?, retainDelegate: Bool) {
-        let requiredMethodsDataSource: UITableViewDataSource? = castOptionalOrFatalError(forwardToDelegate)
-        _requiredMethodsDataSource = requiredMethodsDataSource ?? tableViewDataSourceNotSet
+    /// For more information take a look at `DelegateProxyType`.
+    open override func setForwardToDelegate(_ forwardToDelegate: UITableViewDataSource?, retainDelegate: Bool) {
+        _requiredMethodsDataSource = forwardToDelegate  ?? tableViewDataSourceNotSet
         super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
     }
+
 }
 
 #endif

@@ -13,10 +13,9 @@ class Weather {
     var cityName:String?
     var temp:Double?
     
-    init(json: AnyObject) {
-        let data = JSON(json)
-        self.cityName = data["name"].stringValue
-        self.temp = data["main"]["temp"].doubleValue
+    init(json: JSON) {
+        self.cityName = json["name"].stringValue
+        self.temp = json["main"]["temp"].doubleValue
     }
     
 }

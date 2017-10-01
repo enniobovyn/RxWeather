@@ -1,11 +1,10 @@
-platform :ios, '8.0'
+# Podfile
 use_frameworks!
 
 target 'RxWeather' do
-	pod 'RxSwift', '~> 2.0'
-	pod 'RxCocoa', '~> 2.0'
-	pod 'RxBlocking', '~> 2.0'
-	pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-	pod 'Alamofire', '~> 3.0'
-	pod 'RxAlamofire'
+    pod 'RxSwift', '~> 4.0.0-beta.0'
+	pod 'RxCocoa', '~> 4.0.0-beta.0'
+	pod 'RxAlamofire', :git => 'https://github.com/RxSwiftCommunity/RxAlamofire.git', :branch => 'master'
+	pod 'Alamofire', '~> 4.5.1'
+	pod 'SwiftyJSON', '~> 4.0.0-alpha'
 end

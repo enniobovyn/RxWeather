@@ -23,8 +23,8 @@ class WeatherViewController: UIViewController {
     private var alertController: UIAlertController? {
         didSet {
             if let alertController = alertController {
-                alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                presentViewController(alertController, animated: true, completion: nil)
+              alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+              present(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -43,25 +43,27 @@ class WeatherViewController: UIViewController {
     
     private func doBinding() {
         
-        // Binding the UI
-        cityNameTextField.rx_text
-            .debounce(0.3, scheduler: MainScheduler.instance)
-            .subscribeNext { searchText in
-                self.viewModel.searchText = searchText
-            }
-            .addDisposableTo(disposeBag)
+      // Binding the UI
+      cityNameTextField.rx.text
+        .debounce(0.3, scheduler: MainScheduler.instance)
+        .subscribe(onNext: { searchText in
+          self.viewModel.searchText = searchText
+
+        })
+        .addDisposableTo(disposeBag)
+
+      viewModel.cityName
+        .bind(to: cityNameLabel.rx.text)
+        .addDisposableTo(disposeBag)
         
-        viewModel.cityName
-            .bindTo(cityNameLabel.rx_text)
-            .addDisposableTo(disposeBag)
+      viewModel.temp
+        .bind(to: tempLabel.rx.text)
+        .addDisposableTo(disposeBag)
         
-        viewModel.temp
-            .bindTo(tempLabel.rx_text)
-            .addDisposableTo(disposeBag)
-        
-        viewModel.errorAlertController.subscribeNext { alertController in
+      viewModel.errorAlertController
+        .subscribe(onNext: { alertController in
             self.alertController = alertController
-        }
+        })
         .addDisposableTo(disposeBag)
     }
 

@@ -31,7 +31,7 @@ class WeatherViewModel {
     var searchText:String? {
         didSet {
             if let text = searchText {
-                if (text.characters.count >= 1) {
+                if (text.characters.count >= 3) {
                     let urlString = Constants.URLPrefix + text.replacingOccurrences(of: " ", with: "%20") + Constants.URLSuffix
                   getWeatherForRequest(urlString: urlString)
                 }

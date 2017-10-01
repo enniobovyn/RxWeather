@@ -46,9 +46,9 @@ class WeatherViewController: UIViewController {
       // Binding the UI
       cityNameTextField.rx.text
         .debounce(0.3, scheduler: MainScheduler.instance)
+        .distinctUntilChanged { $0 == $1 }
         .subscribe(onNext: { searchText in
           self.viewModel.searchText = searchText
-
         })
         .addDisposableTo(disposeBag)
 
